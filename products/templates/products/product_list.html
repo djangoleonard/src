@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <!--  {{ object_list }}<br>
+    {{ now }}<br>
+    {{ product_list }}<br>
+    {{ user }}<br>-->
+    <table class="table">
+        {% for object in object_list %}
+            <tr>
+                <td><a href="{{ object.get_absolute_url }}">{{ object.title }}</a>
+                    {#<td><a href="{% url "product_detail" pk=object.pk %}">{{ object.title }}</a></td>#}
+                    {#<td><a href="/products/{{ object.pk }}">{{ object.title }}</a></td>#}
+            </tr>
+        {% endfor %}
+    </table>
+
+
+{% endblock %}

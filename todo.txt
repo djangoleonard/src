@@ -1,0 +1,14 @@
+Products
+--> Single Product (detail view)
+  -->Social Sharing Buttons
+--> List Product (list view)
+--> Inventory Control + Viewable
+--> Search Products
+
+Checkout
+--> Cart (shopping cart)
+--> Auth Users & Guest User (non-auth)
+--> Shipping & Billing Addess
+
+Payment
+--> Integration with Braintree ( steps on other integrations)

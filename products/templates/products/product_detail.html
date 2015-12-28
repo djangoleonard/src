@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-8">
+            <h2>{{ object.title }}</h2>
+            {% if object.productimage_set.count > 0 %}
+                <div>
+                    {% for img in object.productimage_set.all %}
+                        {{ img.image }}<br>
+                        {{ img.image.file }}<br>
+                        {{ img.image.url }}<br>
+                        <img class="img-responsive" src="{{ img.image.url }}" alt="">
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <p class="lead">{{ object.description }}</p>
+        </div>
+        <!-- Product Sidebar -->
+        <div class="col-sm-4">
+            <h3>{{ object.price }}</h3>
+            {% if object.variation_set.count > 1 %}
+                <select class="form-control">
+                    {% for vari_obj in object.variation_set.all %}
+                        <option value="{{ vari_obj.id }}">{{ vari_obj }}</option>
+                    {% endfor %}
+                </select>
+            {% endif %}
+            <br>
+            <a href="#">Add to Cart</a>
+            <br>
+            <hr>
+            <p>
+                Share <br>
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">
+                    <i class="fa fa-facebook-square fa-3x"></i>
+                </a>
+                <a href="https://twitter.com/home?status=I'm%20going%20to%20learn%20to%20Code...%20Come%20build%20an%20web%20apsp%20with%20me!%20%23CFE%20and%20@justinmitchel%20http://codingforentrepreneurs.com/">
+                    <i class="fa fa-twitter-square fa-3x"></i>
+                </a>
+            </p>
+            <hr>
+            <h4>Related Products</h4>
+        </div>
+        <!-- End Product Sidebar -->
+    </div>
+    {#    {{ object.variation_set.all }}#}
+{% endblock %}
