@@ -1,5 +1,44 @@
 {% extends 'base.html' %}
 
+<script>
+    {% block jquery %}
+        function setPrice() {
+            var price = $(".variation_select option:selected").attr("data-price");
+            var sale_price = $(".variation_select option:selected").attr("data-sale-price");
+            if (sale_price != "" && sale_price != "None" && sale_price != null) {
+                $("#price").html("<h3>" + sale_price + " <small class='og-price'>" +
+                        price + "</small></h3>");
+            } else {
+                $("#price").text(price);
+            }
+
+        }
+        setPrice();
+
+        $(".variation_select").change(function () {
+            setPrice()
+        });
+
+        {#        $("#price").css("color", "red");#}
+        {#        var price = $(".variation_select option:selected").attr("data-price");#}
+        {#        $("#price").text(price);#}
+        {#        $(".variation_select").css("color", "red");#}
+        {#        $(".variation_select").change(function () {#}
+        {#            var price = $(".variation_select option:selected").attr("data-price");#}
+        {##}
+        {#            var img = $(".variation_select option:selected").attr("data-img");#}
+        {#            $("#img").attr("src", img);#}
+        {#            var sale_price = $(".variation_select option:selected").attr("data-sale-price");#}
+        {#            if (sale_price != "") {#}
+        {#                $("#price").text(sale_price + " "+ price);#}
+        {#            }else{#}
+        {#                $("#price").text(price);#}
+        {#            }#}
+        {#        });#}
+    {% endblock %}
+</script>
+
+
 {% block content %}
     <div class="row">
         <div class="col-sm-8">
@@ -10,7 +49,7 @@
                         {{ img.image }}<br>
                         {{ img.image.file }}<br>
                         {{ img.image.url }}<br>
-                        <img class="img-responsive" src="{{ img.image.url }}" alt="">
+                        <img id="img" class="img-responsive" src="{{ img.image.url }}" alt="">
                     {% endfor %}
                 </div>
             {% endif %}
@@ -18,13 +57,24 @@
         </div>
         <!-- Product Sidebar -->
         <div class="col-sm-4">
-            <h3>{{ object.price }}</h3>
             {% if object.variation_set.count > 1 %}
-                <select class="form-control">
+                <h3 id="price">{{ object.variation_set.first.price }}</h3>
+                <select class="form-control variation_select">
                     {% for vari_obj in object.variation_set.all %}
-                        <option value="{{ vari_obj.id }}">{{ vari_obj }}</option>
+                        <option data-img="/media/products/iphone-cover/iphone-cover-2_owgp0rB.jpg"
+                                data-sale-price="{{ vari_obj.sale_price }}" data-price="{{ vari_obj.price }}"
+                                value="{{ vari_obj.id }}">{{ vari_obj }}</option>
                     {% endfor %}
                 </select>
+            {% else %}
+                <h3 id="price">
+                    {% if object.variation_set.first.sale_price %}
+                        {{ object.variation_set.first.sale_price }}
+                        <small class='og-price'>{{ object.variation_set.first.price }}</small>
+                    {% else %}
+                        {{ object.variation_set.first.price }}
+                    {% endif %}
+                </h3>
             {% endif %}
             <br>
             <a href="#">Add to Cart</a>

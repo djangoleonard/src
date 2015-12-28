@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MongoConfiguration">
+    <option name="serverConfigurations">
+      <list>
+        <ServerConfiguration>
+          <option name="label" value="Mongodb" />
+          <option name="serverUrls">
+            <list>
+              <option value="localhost:27017" />
+            </list>
+          </option>
+        </ServerConfiguration>
+        <ServerConfiguration>
+          <option name="label" value="Mongolab" />
+          <option name="password" value="maktas63463825/*" />
+          <option name="serverUrls">
+            <list>
+              <option value="ds059712.mongolab.com:59712" />
+            </list>
+          </option>
+          <option name="userDatabase" value="leonard" />
+          <option name="username" value="leonard2005" />
+        </ServerConfiguration>
+      </list>
+    </option>
+    <option name="shellPath" value="C:\Program Files\MongoDB\Server\3.0\bin\mongo.exe" />
+  </component>
+</project>
