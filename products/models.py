@@ -17,6 +17,12 @@ class ProductManager(models.Manager):
         # return self.get_queryset()
         return self.get_queryset().active()
 
+    def get_related(self, instance):
+        products_one = self.get_queryset().filter(categories__in=instance.categories.all())
+        products_two = self.get_queryset().filter(default=instance.default)
+        qs = (products_one | products_two).exclude(id=instance.id).distinct()
+        return qs
+
 
 class Product(models.Model):
     title = models.CharField(max_length=120)
@@ -27,6 +33,9 @@ class Product(models.Model):
     default = models.ForeignKey('Category', related_name='default_category', null=True, blank=True)
 
     objects = ProductManager()
+
+    class Meta:
+        ordering = ["-title"]
 
     def __unicode__(self):   # def __str__(self):
         return self.title
@@ -99,6 +108,7 @@ class ProductImage(models.Model):
 
 # Product Category
 
+
 class Category(models.Model):
     title = models.CharField(max_length=120)
     slug = models.SlugField(unique=True)
@@ -111,7 +121,6 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return reverse("category_detail", kwargs={"slug": self.slug})
-
 
 
 # class ProductCategories(models.Model):

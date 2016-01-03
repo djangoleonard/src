@@ -100,6 +100,11 @@ class ProductDetailView(DetailView):
     model = Product
     # template_name = "product.html"
     # template_name = "<appname>/<modelname>_detail.html"
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProductDetailView, self).get_context_data(*args, **kwargs)
+        instance = self.get_object()
+        context["related"] = Product.objects.get_related(instance).order_by("title")[:6]
+        return context
 
 
 def product_detail_view_func(request, id):
