@@ -1,19 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <!--  {{ object_list }}<br>
-    {{ now }}<br>
-    {{ product_list }}<br>
-    {{ user }}<br>-->
-    <table class="table">
-        {% for object in object_list %}
-            <tr>
-                <td><a href="{{ object.get_absolute_url }}">{{ object.title }}</a>
-                    {#<td><a href="{% url "product_detail" pk=object.pk %}">{{ object.title }}</a></td>#}
-                    {#<td><a href="/products/{{ object.pk }}">{{ object.title }}</a></td>#}
-            </tr>
+    <h1>All Products <small><a href="{% url "categories" %}">Categories</a></small></h1>
+    <div class="row">
+        {% for product in object_list %}
+            <div class="col-xs-4">
+                <div class="thumbnail text-center">
+                    <h4><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></h4>
+                    {% if product.get_image_url %}
+                        <a href="{{ product.get_absolute_url }}"><img id="img" class="img-responsive"
+                                                                      src="{{ product.get_image_url }}" alt=""></a>
+                        <br/>
+                    {% endif %}
+                </div>
+            </div>
+{#            {% cycle '' '' '' '' '' '</div><div class="row">' %}  for col-xs-2#}
+            {% cycle '' '' '</div><div class="row">' %}
+{#            for col-xs-4#}
         {% endfor %}
-    </table>
-
+    </div>
 
 {% endblock %}
