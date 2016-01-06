@@ -46,9 +46,9 @@
             {% if object.get_image_url %}
                 <div>
                     {% for img in object.productimage_set.all %}
-{#                        {{ img.image }}<br>#}
-{#                        {{ img.image.file }}<br>#}
-{#                        {{ img.image.url }}<br>#}
+                        {#                        {{ img.image }}<br>#}
+                        {#                        {{ img.image.file }}<br>#}
+                        {#                        {{ img.image.url }}<br>#}
                         <img id="img" class="img-responsive" src="{{ object.get_image_url }}" alt="">
                     {% endfor %}
                 </div>
@@ -94,16 +94,13 @@
             <div class="row">
                 {% for product in related %}
                     <div class="col-xs-6">
-                        <div class="thumbnail text-center">
-                            <h4><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></h4>
-                            {% if product.get_image_url %}
-                                <a href="{{ product.get_absolute_url }}"><img id="img" class="img-responsive"
-                                                                              src="{{ product.get_image_url }}" alt=""></a>
-                                <br/>
-                            {% endif %}
-                        </div>
+                        {% with product=product %}
+                            {% with price="True" %}
+                                {% include "products/product_thumbnail.html" %}
+                            {% endwith %}
+                        {% endwith %}
                     </div>
-                    {%  cycle '' '</div><div class="row">' %}
+                    {% cycle '' '</div><div class="row">' %}
                 {% endfor %}
             </div>
             {#        {{ related }}#}
