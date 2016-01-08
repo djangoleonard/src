@@ -1,8 +1,13 @@
 .text-align-center {
-	text-align: center;
+    text-align: center;
 }
 
 .og-price {
-	color:red;
-	text-decoration:line-through;
+    color: red;
+    text-decoration: line-through;
+}
+
+.fa-navbar-cart {
+    font-size: 19px;
+    vertical-align: middle;
 }
