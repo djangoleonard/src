@@ -4,28 +4,32 @@
     <h1>All Products
         <small><a href="{% url "categories" %}">Categories</a></small>
     </h1>
-    <div class="row">
-        {% for product in object_list %}
-            <div class="col-xs-4">
-                {% with product=product %}
-                    {% with price="True" %}
-                        {% include "products/product_thumbnail.html" %}
-                    {% endwith %}
-                {% endwith %}
+    {% with object_list=object_list %}
+        {% include "products/products.html" %}
+    {% endwith %}
 
-                {#                <div class="thumbnail text-center">#}
-                {#                    <h4><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></h4>#}
-                {#                    {% if product.get_image_url %}#}
-                {#                        <a href="{{ product.get_absolute_url }}"><img id="img" class="img-responsive"#}
-                {#                                                                      src="{{ product.get_image_url }}" alt=""></a>#}
-                {#                        <br/>#}
-                {#                    {% endif %}#}
-                {#                </div>#}
-            </div>
-            {#            {% cycle '' '' '' '' '' '</div><div class="row">' %}  for col-xs-2#}
-            {% cycle '' '' '</div><div class="row">' %}
-            {#            for col-xs-4#}
-        {% endfor %}
-    </div>
+    {#    <div class="row">#}
+    {#        {% for product in object_list %}#}
+    {#            <div class="col-xs-4">#}
+    {#                {% with product=product %}#}
+    {#                    {% with price="True" %}#}
+    {#                        {% include "products/product_thumbnail.html" %}#}
+    {#                    {% endwith %}#}
+    {#                {% endwith %}#}
+    {##}
+    {#                <div class="thumbnail text-center">#}
+    {#                    <h4><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></h4>#}
+    {#                    {% if product.get_image_url %}#}
+    {#                        <a href="{{ product.get_absolute_url }}"><img id="img" class="img-responsive"#}
+    {#                                                                      src="{{ product.get_image_url }}" alt=""></a>#}
+    {#                        <br/>#}
+    {#                    {% endif %}#}
+    {#                </div>#}
+    {#            </div>#}
+    {#            {% cycle '' '' '' '' '' '</div><div class="row">' %}  for col-xs-2#}
+    {#            {% cycle '' '' '</div><div class="row">' %}#}
+    {#            for col-xs-4#}
+    {#        {% endfor %}#}
+    {#    </div>#}
 
 {% endblock %}
