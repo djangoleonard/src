@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0c0c7016-7d32-4512-9c3b-18e6721a6497" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/carts/carts.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/products/product_detail.html" afterPath="$PROJECT_DIR$/templates/products/product_detail.html" />
     </list>
     <ignored path="src.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -64,11 +64,21 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/carts/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.49298245">
-              <caret line="26" column="19" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="19" />
+            <state vertical-scroll-proportion="0.3140351">
+              <caret line="37" column="27" selection-start-line="37" selection-start-column="27" selection-end-line="37" selection-end-column="27" />
               <folding>
-                <element signature="e#0#44#0" expanded="true" />
+                <element signature="e#0#53#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="product_detail.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/products/product_detail.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-17.0">
+              <caret line="81" column="11" selection-start-line="81" selection-start-column="11" selection-end-line="81" selection-end-column="16" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -139,18 +149,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/newsletter/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="19" column="31" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -189,7 +187,6 @@
         <option value="$PROJECT_DIR$/products/templates/products/product_list.html" />
         <option value="$PROJECT_DIR$/templates/products/category_detail.html" />
         <option value="$PROJECT_DIR$/templates/products/product_thumbnail.html" />
-        <option value="$PROJECT_DIR$/templates/products/product_detail.html" />
         <option value="$PROJECT_DIR$/static_in_pro/our_static/css/navbar-static-top.css" />
         <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/products/models.py" />
@@ -206,8 +203,9 @@
         <option value="$PROJECT_DIR$/carts/admin.py" />
         <option value="$PROJECT_DIR$/ecommerce2/urls.py" />
         <option value="$PROJECT_DIR$/templates/carts/view.html" />
-        <option value="$PROJECT_DIR$/carts/views.py" />
         <option value="$PROJECT_DIR$/templates/carts/carts.html" />
+        <option value="$PROJECT_DIR$/templates/products/product_detail.html" />
+        <option value="$PROJECT_DIR$/carts/views.py" />
       </list>
     </option>
   </component>
@@ -866,7 +864,13 @@
       <option name="project" value="LOCAL" />
       <updated>1452454990806</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="077 Render Cart View lesson finished">
+      <created>1452460502497</created>
+      <option name="number" value="00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1452460502497</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TodoView">
@@ -965,7 +969,8 @@
     <MESSAGE value="073 ManyToMany Through lesson finished" />
     <MESSAGE value="075 Add, Remove, Update Cart in a CBV lesson finished" />
     <MESSAGE value="076 Django Sessions lesson finished" />
-    <option name="LAST_COMMIT_MESSAGE" value="076 Django Sessions lesson finished" />
+    <MESSAGE value="077 Render Cart View lesson finished" />
+    <option name="LAST_COMMIT_MESSAGE" value="077 Render Cart View lesson finished" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1136,13 +1141,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/products/product_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.576923">
-          <caret line="7" column="76" selection-start-line="7" selection-start-column="76" selection-end-line="7" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/products/category_detail.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1231,6 +1229,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1262,7 +1261,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="19" column="31" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
           <folding>
-            <element signature="e#0#32#0" expanded="true" />
+            <element signature="e#0#32#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1346,12 +1345,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/products/product_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-17.0">
+          <caret line="81" column="11" selection-start-line="81" selection-start-column="11" selection-end-line="81" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/carts/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.49298245">
-          <caret line="26" column="19" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="19" />
+        <state vertical-scroll-proportion="0.3140351">
+          <caret line="37" column="27" selection-start-line="37" selection-start-column="27" selection-end-line="37" selection-end-column="27" />
           <folding>
-            <element signature="e#0#44#0" expanded="true" />
+            <element signature="e#0#53#0" expanded="true" />
           </folding>
         </state>
       </provider>
