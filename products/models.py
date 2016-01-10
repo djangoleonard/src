@@ -38,7 +38,7 @@ class Product(models.Model):
     class Meta:
         ordering = ["-title"]
 
-    def __unicode__(self):   # def __str__(self):
+    def __unicode__(self):  # def __str__(self):
         return self.title
 
     def get_absolute_url(self):
@@ -48,10 +48,10 @@ class Product(models.Model):
         img = self.productimage_set.first()
         if img:
             return img.image.url
-        return img #None
+        return img  # None
 
-    # def get_absolute_url(self):
-    #     return "/products/%s" % self.pk
+        # def get_absolute_url(self):
+        #     return "/products/%s" % self.pk
 
 
 class Variation(models.Model):
@@ -60,7 +60,7 @@ class Variation(models.Model):
     price = models.DecimalField(decimal_places=2, max_digits=10)
     sale_price = models.DecimalField(decimal_places=2, max_digits=10, null=True, blank=True)
     active = models.BooleanField(default=True)
-    inventory = models.IntegerField(null=True, blank=True)   # refer none == unlimited amount
+    inventory = models.IntegerField(null=True, blank=True)  # refer none == unlimited amount
 
     def __unicode__(self):
         return self.title
@@ -73,11 +73,11 @@ class Variation(models.Model):
 
     def get_html_price(self):
         if self.sale_price is not None:
-            html_text = "<span class='sale-price'>%s</span> <span class='og-price'>%s</span>" %(self.sale_price, self.price)
+            html_text = "<span class='sale-price'>%s</span> <span class='og-price'>%s</span>" % (
+            self.sale_price, self.price)
         else:
             html_text = "<span class='price'>%s</span>" % self.price
         return mark_safe(html_text)
-
 
     # def get_html_price(self):
     #     if self.sale_price is not None:
@@ -89,6 +89,15 @@ class Variation(models.Model):
 
     def get_absolute_url(self):
         return self.product.get_absolute_url()
+
+    def add_to_cart(self):
+        return "%s?item=%s&qty=1" % (reverse("cart"), self.id)
+
+    def remove_from_cart(self):
+        return "%s?item=%s&qty=1&delete=True" % (reverse("cart"), self.id)
+
+    def get_title(self):
+        return "%s - %s" % (self.product.title, self.title)
 
 
 def product_saved_receiver(sender, instance, created, *args, **kwargs):
@@ -102,12 +111,14 @@ def product_saved_receiver(sender, instance, created, *args, **kwargs):
         new_var.price = product.price
         new_var.save()
 
-    #  varations = Variation.objects.filter(product=product)
+        #  varations = Variation.objects.filter(product=product)
 
-    # print instance
-    # print created
+        # print instance
+        # print created
+
 
 post_save.connect(product_saved_receiver, sender=Product)
+
 
 # Product Images
 
@@ -128,6 +139,7 @@ class ProductImage(models.Model):
 
     def __unicode__(self):
         return self.product.title
+
 
 # Product Category
 

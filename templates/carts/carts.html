@@ -1,6 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-{{ object }}
-{{ object.items.all }}
+{#    {{ object }}#}
+{#    {{ object.items.all }}#}
+{#    {{ object.cartitem_set.all }}#}
+    <table class="table">
+        {% for item in object.cartitem_set.all %}
+            <tr>
+                <td>{{ item.item.get_title }}</td>
+                <td>{{ item.quantity }}</td>
+            <td>{{ item.line_total }}</td>
+            <td class="text-right"><a href="{{ item.remove }}">X</a></td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}
