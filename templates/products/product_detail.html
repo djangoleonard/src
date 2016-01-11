@@ -27,12 +27,12 @@
                 url: "{% url 'cart' %}",
                 data: formData,
                 success: function (data) {
-{#                    console.log(data)#}
+                    // console.log(data)
                     $("#jquery-message").text("Added " + data.item_added + " Deleted " + data.deleted)
                 },
                 error: function (response, error) {
-{#                    console.log(response)#}
-{#                    console.log(error)#}
+                    // console.log(response)
+                    // console.log(error)
                     $("#add-form").submit()
                 }
             });
@@ -62,7 +62,7 @@
         </div>
         <!-- Product Sidebar -->
         <div class="col-sm-4">
-        <p id="jquery-message" class="lead"></p>
+            <p id="jquery-message" class="lead"></p>
             <form id="add-form" action="{% url 'cart' %}" method="GET">
                 {% if object.variation_set.count > 1 %}
                     <h3 id="price">{{ object.variation_set.first.price }}</h3>
