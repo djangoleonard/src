@@ -46,10 +46,11 @@
             {% if object.get_image_url %}
                 <div>
                     {% for img in object.productimage_set.all %}
-                        {#                        {{ img.image }}<br>#}
-                        {#                        {{ img.image.file }}<br>#}
-                        {#                        {{ img.image.url }}<br>#}
-                        <img id="img" class="img-responsive" src="{{ object.get_image_url }}" alt="">
+{#                                                {{ img.image }}<br>#}
+{#                                                {{ img.image.file }}<br>#}
+{#                                                {{ img.image.url }}<br>#}
+                        <img id="img" class="img-responsive" src="{{ img.image.url }}" alt="">
+{#                        <img id="img" class="img-responsive" src="{{ object.get_image_url }}" alt="">#}
                     {% endfor %}
                 </div>
             {% endif %}

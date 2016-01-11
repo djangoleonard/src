@@ -1,16 +1,33 @@
 {% extends "base.html" %}
+<script>
+    {% block jquery %}
+        $(".item-qty").change(function(){
+            $(this).next(".btn-update").fadeIn();
+        });
+
+    {% endblock %}
+</script>
+
+
 
 {% block content %}
-{#    {{ object }}#}
-{#    {{ object.items.all }}#}
-{#    {{ object.cartitem_set.all }}#}
+    {#    {{ object }}#}
+    {#    {{ object.items.all }}#}
+    {#    {{ object.cartitem_set.all }}#}
     <table class="table">
         {% for item in object.cartitem_set.all %}
             <tr>
-                <td>{{ item.item.get_title }}</td>
-                <td>{{ item.quantity }}</td>
-            <td>{{ item.line_total }}</td>
-            <td class="text-right"><a href="{{ item.remove }}">X</a></td>
+                <form action="." method="GET">
+                    <td>{{ item.item.get_title }}</td>
+                    <input type="hidden" name="item" value="{{ item.item.id }}"/>
+                    <td><input type="number" class="item-qty" name="qty" value="{{ item.quantity }}"/>
+                        <input type="submit" class="btn-update btn btn-link" value="Update item" style="display: none;"/>
+                    </td>
+                    <td>{{ item.line_total }}</td>
+                    <td class="text-right"><a href="{{ item.remove }}">X</a>
+
+                    </td>
+                </form>
             </tr>
         {% endfor %}
     </table>
