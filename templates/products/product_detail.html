@@ -18,23 +18,27 @@
         $(".variation_select").change(function () {
             setPrice()
         });
+        $("#submit-btn").click(function (event) {
+            event.preventDefault();
+            var formData = $("#add-form").serialize();
+            console.log(formData);
+            $.ajax({
+                type: "GET",  // "POST"
+                url: "{% url 'cart' %}",
+                data: formData,
+                success: function (data) {
+{#                    console.log(data)#}
+                    $("#jquery-message").text("Added " + data.item_added + " Deleted " + data.deleted)
+                },
+                error: function (response, error) {
+{#                    console.log(response)#}
+{#                    console.log(error)#}
+                    $("#add-form").submit()
+                }
+            });
+            // $("#add-form").submit()
 
-        {#        $("#price").css("color", "red");#}
-        {#        var price = $(".variation_select option:selected").attr("data-price");#}
-        {#        $("#price").text(price);#}
-        {#        $(".variation_select").css("color", "red");#}
-        {#        $(".variation_select").change(function () {#}
-        {#            var price = $(".variation_select option:selected").attr("data-price");#}
-        {##}
-        {#            var img = $(".variation_select option:selected").attr("data-img");#}
-        {#            $("#img").attr("src", img);#}
-        {#            var sale_price = $(".variation_select option:selected").attr("data-sale-price");#}
-        {#            if (sale_price != "") {#}
-        {#                $("#price").text(sale_price + " "+ price);#}
-        {#            }else{#}
-        {#                $("#price").text(price);#}
-        {#            }#}
-        {#        });#}
+        });
     {% endblock %}
 </script>
 
@@ -46,11 +50,11 @@
             {% if object.get_image_url %}
                 <div>
                     {% for img in object.productimage_set.all %}
-{#                                                {{ img.image }}<br>#}
-{#                                                {{ img.image.file }}<br>#}
-{#                                                {{ img.image.url }}<br>#}
+                        {#                                                {{ img.image }}<br>#}
+                        {#                                                {{ img.image.file }}<br>#}
+                        {#                                                {{ img.image.url }}<br>#}
                         <img id="img" class="img-responsive" src="{{ img.image.url }}" alt="">
-{#                        <img id="img" class="img-responsive" src="{{ object.get_image_url }}" alt="">#}
+                        {#                        <img id="img" class="img-responsive" src="{{ object.get_image_url }}" alt="">#}
                     {% endfor %}
                 </div>
             {% endif %}
@@ -58,7 +62,8 @@
         </div>
         <!-- Product Sidebar -->
         <div class="col-sm-4">
-            <form action="{% url 'cart' %}" method="GET">
+        <p id="jquery-message" class="lead"></p>
+            <form id="add-form" action="{% url 'cart' %}" method="GET">
                 {% if object.variation_set.count > 1 %}
                     <h3 id="price">{{ object.variation_set.first.price }}</h3>
 
@@ -80,10 +85,10 @@
                         {% endif %}
                     </h3>
                 {% endif %}
-            <br>
+                <br>
                 <input class="form-control" type="number" name="qty" value="1">
                 <br>
-                <input type="submit" class="btn btn-default" value="Add to Cart"/>
+                <input id="submit-btn" type="submit" class="btn btn-default" value="Add to Cart"/>
             </form>
             <br>
             <hr>
