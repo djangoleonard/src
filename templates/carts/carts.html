@@ -10,7 +10,7 @@
             var data = {
                 item: item,
                 qty: qty
-            }
+            };
             console.log(data);
             $.ajax({
                 type: "GET",  // "POST"
@@ -24,8 +24,8 @@
                     }else{
                         $("#item-line-total-"+item).text(data.line_total);
                         $("#subtotal").text(data.subtotal);
-
                     }
+                    showFlashMessage("Cart updated");
                 },
                 error: function (response, error) {
                     // console.log(response)

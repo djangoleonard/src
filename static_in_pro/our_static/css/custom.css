@@ -11,3 +11,12 @@
     font-size: 19px;
     vertical-align: middle;
 }
+.container-alert-flash {
+    margin: 0px;
+    position: absolute;
+    right: 0%;
+    top: 10px;
+    width: 100%;
+    z-index: 50000;
+    display: none;
+}

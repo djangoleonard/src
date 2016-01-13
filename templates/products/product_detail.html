@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 <script xmlns="http://www.w3.org/1999/html">
     {% block jquery %}
         function setPrice() {
@@ -18,6 +17,16 @@
         $(".variation_select").change(function () {
             setPrice()
         });
+{#        function showFlashMessage(message) {#}
+{#            var template = "{% include 'alert.html' with message='" + message + "' %}";#}
+{#            console.log(template);#}
+{#            $("body").append(template);#}
+{#            $(".container-alert-flash").fadeIn();#}
+{#            setTimeout(function () {#}
+{#                $(".container-alert-flash").fadeOut();#}
+{#            }, 1800);#}
+{#        }#}
+
         $("#submit-btn").click(function (event) {
             event.preventDefault();
             var formData = $("#add-form").serialize();
@@ -28,7 +37,8 @@
                 data: formData,
                 success: function (data) {
                     // console.log(data)
-                    $("#jquery-message").text("Added " + data.item_added + " Deleted " + data.deleted)
+                    $("#jquery-message").text("Added " + data.item_added + " Deleted " + data.deleted);
+                    showFlashMessage("Product added");
                 },
                 error: function (response, error) {
                     // console.log(response)
@@ -44,8 +54,11 @@
 
 
 {% block content %}
-    <div class="row">
-        <div class="col-sm-8">
+
+
+
+    <div class='row'>
+        <div class='col-sm-8'>
             <h2>{{ object.title }}</h2>
             {% if object.get_image_url %}
                 <div>
@@ -53,30 +66,30 @@
                         {#                                                {{ img.image }}<br>#}
                         {#                                                {{ img.image.file }}<br>#}
                         {#                                                {{ img.image.url }}<br>#}
-                        <img id="img" class="img-responsive" src="{{ img.image.url }}" alt="">
-                        {#                        <img id="img" class="img-responsive" src="{{ object.get_image_url }}" alt="">#}
+                        <img id='img' class='img-responsive' src='{{ img.image.url }}' alt=''>
+                        {#                        <img id='img' class='img-responsive' src='{{ object.get_image_url }}' alt=''>#}
                     {% endfor %}
                 </div>
             {% endif %}
-            <p class="lead">{{ object.description }}</p>
+            <p class='lead'>{{ object.description }}</p>
         </div>
         <!-- Product Sidebar -->
-        <div class="col-sm-4">
-            <p id="jquery-message" class="lead"></p>
-            <form id="add-form" action="{% url 'cart' %}" method="GET">
+        <div class='col-sm-4'>
+            <p id='jquery-message' class='lead'></p>
+            <form id='add-form' method='GET' action='{% url 'cart' %}'>
                 {% if object.variation_set.count > 1 %}
-                    <h3 id="price">{{ object.variation_set.first.price }}</h3>
+                    <h3 id='price'>{{ object.variation_set.first.price }}</h3>
 
-                    <select name="item" class="form-control variation_select">
+                    <select name='item' class='form-control variation_select'>
                         {% for vari_obj in object.variation_set.all %}
-                            <option data-sale-price="{{ vari_obj.sale_price }}"
-                                    data-price="{{ vari_obj.price }}"
-                                    value="{{ vari_obj.id }}">{{ vari_obj }}</option>
+                            <option data-sale-price='{{ vari_obj.sale_price }}'
+                                    data-price='{{ vari_obj.price }}'
+                                    value='{{ vari_obj.id }}'>{{ vari_obj }}</option>
                         {% endfor %}
                     </select>
                 {% else %}
-                    <input type="hidden" name="item" value="{{ object.variation_set.first.id }}"/>
-                    <h3 id="price">
+                    <input type='hidden' name='item' value='{{ object.variation_set.first.id }}'/>
+                    <h3 id='price'>
                         {% if object.variation_set.first.sale_price %}
                             {{ object.variation_set.first.sale_price }}
                             <small class='og-price'>{{ object.variation_set.first.price }}</small>
@@ -86,33 +99,33 @@
                     </h3>
                 {% endif %}
                 <br>
-                <input class="form-control" type="number" name="qty" value="1">
+                <input class='form-control' type='number' name='qty' value='1'>
                 <br>
-                <input id="submit-btn" type="submit" class="btn btn-default" value="Add to Cart"/>
+                <input id='submit-btn' type='submit' class='btn btn-default' value='Add to Cart'/>
             </form>
             <br>
             <hr>
             <p>
                 Share <br>
-                <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">
-                    <i class="fa fa-facebook-square fa-3x"></i>
+                <a href='https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}'>
+                    <i class='fa fa-facebook-square fa-3x'></i>
                 </a>
                 <a href="https://twitter.com/home?status=I'm%20going%20to%20learn%20to%20Code...%20Come%20build%20an%20web%20apsp%20with%20me!%20%23CFE%20and%20@justinmitchel%20http://codingforentrepreneurs.com/">
-                    <i class="fa fa-twitter-square fa-3x"></i>
+                    <i class='fa fa-twitter-square fa-3x'></i>
                 </a>
             </p>
             <hr>
             <h4>Related Products</h4>
-            <div class="row">
+            <div class='row'>
                 {% for product in related %}
-                    <div class="col-xs-6">
+                    <div class='col-xs-6'>
                         {% with product=product %}
-                            {% with price="True" %}
-                                {% include "products/product_thumbnail.html" %}
+                            {% with price='True' %}
+                                {% include 'products/product_thumbnail.html' %}
                             {% endwith %}
                         {% endwith %}
                     </div>
-                    {% cycle '' '</div><div class="row">' %}
+                    {% cycle '' "</div><div class='row'>" %}
                 {% endfor %}
             </div>
             {#        {{ related }}#}
