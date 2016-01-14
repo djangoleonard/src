@@ -18,14 +18,23 @@
                 data: data,
                 success: function (data) {
                     // console.log(data)
-                    $("#jquery-message").text("Added " + data.item_added + " Deleted " + data.deleted)
-                    if (data.deleted){
-                        $("#item-"+item).fadeOut();
-                    }else{
-                        $("#item-line-total-"+item).text(data.line_total);
+                    $("#jquery-message").text("Added " + data.item_added + " Deleted " + data.deleted);
+                    if (data.deleted) {
+                        $("#item-" + item).fadeOut();
+                    } else {
+                        $("#item-line-total-" + item).text(data.line_total);
                         $("#subtotal").text(data.subtotal);
                     }
-                    showFlashMessage("Cart updated");
+                    var message = "";
+                    if (data.item_added) {
+                        message = "New item added"
+                    } else if (data.deleted) {
+                        message = "Item removed"
+                    } else {
+                        message = "Item updated"
+                    }
+                    // showFlashMessage("Cart updated");
+                    showFlashMessage(message);
                 },
                 error: function (response, error) {
                     // console.log(response)
