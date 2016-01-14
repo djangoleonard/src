@@ -7,6 +7,21 @@ from products.models import Variation
 from carts.models import Cart, CartItem
 
 
+class ItemCountView(View):
+    def get(self, request, *args, **kwargs):
+        if request.is_ajax():
+            cart_id = self.request.session.get("cart_id")
+            if cart_id == None:
+                count = 0
+            else:
+                cart = Cart.objects.get(id=cart_id)
+                count = cart.items.count()
+            request.session["cart_item_count"] = count
+            return JsonResponse({"count": count})
+        else:
+            raise Http404
+
+
 class CartView(SingleObjectMixin, View):
     model = Cart
     template_name = "carts/carts.html"
@@ -45,7 +60,7 @@ class CartView(SingleObjectMixin, View):
             # cart = Cart.objects.all().first()
             cart_item, created = CartItem.objects.get_or_create(cart=cart, item=item_instance)
             if created:
-                flash_message = "Item successfully added to the cart"
+                flash_message = "Successfully added to the cart"
                 item_added = True
             if delete_item:
                 flash_message = "Item removed successfully"
