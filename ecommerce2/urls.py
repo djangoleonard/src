@@ -3,7 +3,7 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 
-from carts.views import CartView, ItemCountView
+from carts.views import CartView, ItemCountView, CheckoutView
 
 urlpatterns = [
     # Examples:
@@ -18,6 +18,7 @@ urlpatterns = [
     url(r'^categories/', include('products.url_categories')),
     url(r'^cart/$', CartView.as_view(), name='cart'),
     url(r'^cart/count/$', ItemCountView.as_view(), name='item_count'),
+    url(r'^checkout/$', CheckoutView.as_view(), name='checkout'),
 
 ]
 
