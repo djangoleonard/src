@@ -3,14 +3,15 @@
 {% load crispy_forms_tags %}
 {% block content %}
     {#    {{ user_auth }}#}
-    <div class="col-sm-6">
-        <p class="lead">Continue as Guest</p>
-        <form action="" method="post">{% csrf_token %}
-            {{ form|crispy }}
-            <input type="submit" class="btn btn-success" value="Continue as Guest">
-        </form>
-    </div>
     {% if not user_can_continue %}
+        <div class="col-sm-6">
+            <p class="lead">Continue as Guest</p>
+            <form action="" method="post">{% csrf_token %}
+                {{ form|crispy }}
+                <input type="submit" class="btn btn-success" value="Continue as Guest">
+            </form>
+        </div>
+
         <div class="col-sm-6">
             <p class="lead">Login to Continue</p>
             <form action="{% url 'auth_login' %}" method="post">{% csrf_token %}
