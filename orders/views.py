@@ -12,6 +12,7 @@ class AddressSelectFormView(FormView):
     def get_form(self, *args, **kwargs):
         form = super(AddressSelectFormView, self).get_form(*args, **kwargs)
         # print form.fields
+
         form.fields["billing_address"].queryset = UserAddress.objects.filter(
                 user__email=self.request.user.email,
                 type='billing',
