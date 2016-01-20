@@ -8,7 +8,7 @@ from django.views.generic.edit import FormMixin
 
 # Create yor views here.
 from orders.forms import GuestCheckoutForm
-from orders.models import UserCheckout
+from orders.models import UserCheckout, Order, UserAddress
 from products.models import Variation
 
 
@@ -152,6 +152,7 @@ class CheckoutView(FormMixin, DetailView):
             context["next_url"] = self.request.build_absolute_uri()
         elif self.request.user.is_authenticated() or user_check_id != None:  # or if self.request.user.is_guest :
             user_can_continue = True
+            # return redirect "address select view"
         else:
             pass
         if self.request.user.is_authenticated():
@@ -179,6 +180,45 @@ class CheckoutView(FormMixin, DetailView):
 
     def get_success_url(self):
         return reverse("checkout")
+
+    def get(self, request, *args, **kwargs):
+        get_data = super(CheckoutView, self).get(request, *args, **kwargs)
+
+        cart = self.get_object()
+        user_checkout_id = request.session.get("user_checkout_id")
+        if request.session.get("user_checkout_id") != None:
+            user_checkout = UserCheckout.objects.get(id=user_checkout_id)
+            billing_address_id = request.session.get("billing_address_id")
+            shipping_address_id = request.session.get("shipping_address_id")
+
+            if billing_address_id == None or shipping_address_id == None:
+                return redirect("order_address")
+            else:
+                billing_address = UserAddress.objects.get(id=billing_address_id)
+                shipping_address = UserAddress.objects.get(id=shipping_address_id)
+
+            try:
+                new_order_id= request.session["order_id"]
+                new_order = Order.objects.get(id=new_order_id)
+            except:
+                new_order = Order()
+                request.session["order_id"] = new_order.id
+
+
+            new_order = Order()
+            new_order.cart = cart
+            new_order.user = user_checkout
+            new_order.billing_address = billing_address
+            new_order.shipping_address = shipping_address
+            new_order.save()
+
+        return get_data
+
+
+
+
+
+
 
 
 
