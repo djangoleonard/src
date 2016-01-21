@@ -36,7 +36,7 @@
                 <tr>
                     <td>Items : <br/>
                         {% for i in order.cart.cartitem_set.all %}
-                            <b>{{ i.item.get_title }}</b> {{ i.item.price }}
+                            <b>{{ i.item.get_title }}</b> {{ i.item.price }}<br/>
                         {% endfor %}
                     </td>
                 </tr>
