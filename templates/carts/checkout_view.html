@@ -63,7 +63,9 @@
             </p>
             <p><b>Shipping to</b><br>
                 {{ order.shipping_address.get_address }}
-            </p><br>
+            </p>
+            <p><a href="{% url 'order_address' %}">Change an Address </a></p>
+            <br>
         <p><b>Complete Order</b><br>
             </p>
         </div>
