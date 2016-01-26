@@ -66,8 +66,11 @@
             </p>
             <p><a href="{% url 'order_address' %}">Change an Address </a></p>
             <br>
-        <p><b>Complete Order</b><br>
-            </p>
+            <form method="post" action="{% url 'checkout_final' %}">{% csrf_token %}
+                <input type="hidden" name="payment_token" value="ABC"/>
+                <p><b><button type="submit">Complete Order</button></b></p>
+            </form>
+
         </div>
     {% endif %}
 {% endblock %}
