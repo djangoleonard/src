@@ -164,7 +164,7 @@ class CheckoutView(CartOrderMixin, FormMixin, DetailView):
 
         if user_check_id != None:
             user_can_continue = True
-
+        # if self.get_cart() is not None:
         context["order"] = self.get_order()
         context["user_can_continue"] = user_can_continue
         context["form"] = self.get_form()
@@ -210,7 +210,11 @@ class CheckoutFinalView(CartOrderMixin, View):
         # print request.POST.get("payment_token")
         order = self.get_order()
         if request.POST.get("payment_token") == "ABC":
-            print order.cart.items.all()
+            # print order.cart.items.all()
+            order.mark_completed()
+            # print order.mark_completed()
+            del request.session["cart_id"]
+            del request.session["order_id"]
         return redirect("checkout")
 
 
